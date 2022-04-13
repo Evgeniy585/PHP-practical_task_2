@@ -42,7 +42,7 @@ if (isset($_SESSION['username'])) {
 </div>
 </a>";
     { ?>
-        <p align="center">Вы успешно зарегистрировались! Через 10 секунд будет произведено перенаправление на главную страницу</p>
+        <p align="center">Вы успешно авторизировались! Через 10 секунд будет произведено перенаправление на главную страницу</p>
         <script> window.setTimeout(function() { window.location = 'form.php'; }, 10000) </script>
     <?php }
 }
