@@ -12,11 +12,11 @@
 <body>
 <div class="container">
     <form class="form-signin" method="POST">
-        <h2>Login</h2>
+        <h2>Авторизация</h2>
         <input type="text" name="username" class="form-control" placeholder="Username" required>
         <input type="password" name="password" class="form-control" placeholder="Password" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button><br><br>
-        <a href="index.php" class="btn btn-lg btn-primary btn-block">Registration</a>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Авторизация</button><br><br>
+        <a href="index.php" class="btn btn-lg btn-primary btn-block">Зарегистрироваться</a>
 </div>
 
 <?php
@@ -38,7 +38,7 @@ if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
     echo "<a href='logout.php' 
 <div class='d-grid gap-2 col-1 mx-auto'>
-  <button class='btn btn-sm btn-secondary' type='button'>Logout</button>
+  <button class='btn btn-sm btn-secondary' type='button'>Выйти</button>
 </div>
 </a>";
     { ?>

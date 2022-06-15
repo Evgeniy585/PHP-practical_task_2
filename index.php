@@ -26,17 +26,18 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
         $false = "Ошибка!";
     }
 }
+mysqli_close ($connection);
 ?>
     <div class="container">
         <form class="form-signin" method="POST">
-            <h2>Registration</h2>
+            <h2>Регистрация</h2>
             <?php if(isset($successfully)){ ?><div class="alert alert-success" role="alert"> <?php echo $successfully; ?> </div><?php }?>
             <?php if(isset($false)){ ?><div class="alert alert-danger" role="alert"> <?php echo $false; ?> </div><?php }?>
             <input type="text" name="username" class="form-control" placeholder="Username" required>
             <input type="email" name="email" class="form-control" placeholder="Email" required>
             <input type="password" name="password" class="form-control" placeholder="Password" required>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button><br><br>
-            <a href="login.php" class="btn btn-lg btn-primary btn-block">Login</a>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Зарегистрироваться</button><br><br>
+            <a href="login.php" class="btn btn-lg btn-primary btn-block">Авторизация</a>
     </div>
 </body>
 </html>
