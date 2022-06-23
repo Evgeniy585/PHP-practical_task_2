@@ -15,42 +15,47 @@
 require('connect.php');
 if (isset( $_POST[ 'submit' ]))
 {
-    if ((!isset( $_POST[ 'Name' ])) && (!isset( $_POST[ 'Text' ])) &&
-        (!isset( $_POST[ 'gender' ])) && (!isset( $_POST[ 'language' ])) &&
+    if ((!isset( $_POST[ 'Name' ])) && (!isset( $_POST[ 'Text' ])) && (!isset( $_POST[ 'gender' ])) &&
+        (!isset( $_POST[ 'language1' ])) && (!isset( $_POST[ 'language2' ])) && (!isset( $_POST[ 'language3' ])) && (!isset( $_POST[ 'language4' ])) &&
         (!isset( $_POST[ 'list' ])))
     {
         echo "*" . "Пожалуйста заполните все поля";
     }
-    else
-    {
+    else {
         $Name = $_POST['Name'];
         $Text = $_POST['Text'];
         $gender = $_POST['gender'];
-        $language = $_POST['language'];
+        $language1 = $_POST['language1'];
+        $language2 = $_POST['language2'];
+        $language3 = $_POST['language3'];
+        $language4 = $_POST['language4'];
         $list = $_POST['list'];
-        echo "Данные отправлены!";
+
+        $table = "SHOW TABLES LIKE 'data'";
+        $check = mysqli_query($connection, $table);
+        if ($check === false) {
+            echo "Данной таблицы не существует";
+        } else {
+
+            $sql_query = "INSERT INTO `data`(`username`) SELECT DISTINCT `username` FROM `users`";
+            $res = mysqli_query($connection, $sql_query) or die(mysqli_error($connection));
+
+            if (isset($sql_query)) {
+                $query = "INSERT INTO `data` (`Name`, `Text`, gender, `language1`, `language2`, `language3`, `language4`,  `list`) VALUES ('" . $Name . "','" . $Text . "','" . $gender . "','" . $language1 . "','" . $language2 . "','" . $language3 . "','" . $language4 . "','" . $list . "')";
+                $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
+                if ($result) {
+                    echo "Данные успешно добавлены!";
+                } else {
+                    echo "Ошибка!";
+                }
+            }
+
+            mysqli_close($connection);
+        }
     }
 }
 
-
-$sql_query = "INSERT INTO `data`(`username`) SELECT DISTINCT `username` FROM `users`";
-$res = mysqli_query($connection, $sql_query) or die(mysqli_error($connection));
-
-
-
-if (isset($sql_query)) {
-    $query = "INSERT INTO `data` (Name, Text, gender, language, list) VALUES ('" . $Name . "','" . $Text . "','" . $gender . "','" . $language . "','" . $list . "')";
-    $result = mysqli_query($connection, $query) or die(mysqli_error($connection));
-    if ($result) {
-        echo "Данные успешно добавлены!";
-    } else {
-        echo "Ошибка!";
-        }
-    }
-
-mysqli_close ($connection);
 ?>
-
 
 <body class = "container-sm mt-5">
     <form action="form.php" method="POST">
@@ -79,23 +84,23 @@ mysqli_close ($connection);
         </div><br>
 
         <p>Каким иностранным языком вы владеете:</p>
-        <div class="form-check" name="language" value="English">
-            <input type="checkbox" name="language" value="English">
+        <div class="form-check" name="language1" value="English">
+            <input type="checkbox" name="language1" value="English">
             <label for="language">Английский
             </label>
         </div>
-        <div class="form-check" name="language" value="French">
-            <input type="checkbox" name="language" value="French">
+        <div class="form-check" name="language2" value="French">
+            <input type="checkbox" name="language2" value="French">
             <label for="language">Французский
             </label>
         </div>
-        <div class="form-check" name="language" value="Deutsch">
-            <input type="checkbox" name="language" value="Deutsch">
+        <div class="form-check" name="language3" value="Deutsch">
+            <input type="checkbox" name="language3" value="Deutsch">
             <label for="language">Немецкий
             </label>
         </div>
-        <div class="form-check" name="language" value="Spanish">
-            <input type="checkbox" name="language" value="Spanish">
+        <div class="form-check" name="language4" value="Spanish">
+            <input type="checkbox" name="language4" value="Spanish">
             <label for="language">Испанский
             </label>
         </div><br>
